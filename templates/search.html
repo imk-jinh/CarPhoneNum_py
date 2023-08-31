@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Image Text Extraction</title>
+  </head>
+  <body>
+    <h2>이미지 분석 및 차량번호 조회</h2>
+    <button class="style_button" onclick="location.href='/'">홈화면</button>
+    <button class="style_button" onclick="location.href='/register'">
+      등록화면
+    </button>
+
+    <form action="/search" method="POST" enctype="multipart/form-data">
+      <input type="file" name="image" accept="image/*" />
+      <input type="submit" value="이미지 분석 후 조회하기" />
+    </form>
+    <h2>차량번호 조회</h2>
+    <form method="POST" action="/api/get_data">
+      <label for="search_car_number">차량번호:</label>
+      <input
+        type="text"
+        id="search_car_number"
+        name="search_car_number"
+      /><br /><br />
+      <input type="submit" value="조회" />
+    </form>
+    {% if result %}
+    <h3>결과:</h3>
+    <p>차량번호: {{ result.car_number }}</p>
+    <p>전화번호: {{ result.phone_number }}</p>
+    {% elif error %}
+    <p>{{ error }}</p>
+    {% endif %} {% if extracted_text %}
+    <h2>Extracted Text:</h2>
+    <pre>조회한 차량 번호: {{ extracted_text }}</pre>
+    {% endif %}
+  </body>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+      text-align: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    /* 폼 스타일링 */
+    form {
+      display: flex;
+      flex-direction: column;
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    label {
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    input[type='text'],
+    input[type='file'] {
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      margin: 10px auto;
+      width: 500px;
+      height: 30px;
+    }
+
+    input[type='submit'] {
+      background-color: #007bff;
+      color: #fff;
+      padding: 10px;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background-color 0.3s ease-in-out;
+      margin: 10px auto;
+      width: 500px;
+      height: 50px;
+    }
+
+    input[type='submit']:hover {
+      background-color: #0056b3;
+    }
+
+    /* 헤더 스타일링 */
+    header {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 10px 0;
+    }
+
+    /* 네비게이션 스타일링 */
+    nav {
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #333;
+      margin: 0 15px;
+      transition: color 0.3s ease-in-out;
+    }
+
+    nav a:hover {
+      color: #007bff;
+    }
+
+    /* 결과 스타일링 */
+    .result {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #f0f0f0;
+      border-radius: 3px;
+    }
+
+    /* 추출된 텍스트 스타일링 */
+    .extracted-text {
+      margin-top: 20px;
+      white-space: pre-wrap;
+      font-size: 14px;
+      line-height: 1.5;
+      color: #333;
+    }
+
+    .style_button {
+      background-color: #007bff;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background-color 0.3s ease-in-out;
+      margin: 10px 5px;
+    }
+
+    .style_button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</html>
