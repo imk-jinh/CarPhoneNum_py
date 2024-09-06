@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>차량번호 및 전화번호 입력</title>
+  </head>
+  <body>
+    <h2>차량번호 및 전화번호 입력</h2>
+    <form method="POST" action="/" enctype="multipart/form-data">
+      <label for="car_number">차량번호:</label>
+      <input type="text" id="car_number" name="car_number" /><br /><br />
+      <label for="phone_number">전화번호:</label>
+      <input type="text" id="phone_number" name="phone_number" /><br /><br />
+      <input type="file" name="image" accept="image/*" /><br /><br />
+      <input type="submit" value="저장" />
+    </form>
+    <h2>차량번호 조회</h2>
+    <form method="POST" action="/api/get_data">
+      <label for="search_car_number">차량번호:</label>
+      <input
+        type="text"
+        id="search_car_number"
+        name="search_car_number"
+      /><br /><br />
+      <input type="submit" value="조회" />
+    </form>
+    {% if result %}
+    <h3>결과:</h3>
+    <p>차량번호: {{ result.car_number }}</p>
+    <p>전화번호: {{ result.phone_number }}</p>
+    {% elif error %}
+    <p>{{ error }}</p>
+    {% endif %}
+  </body>
+</html>

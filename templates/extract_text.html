@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Image Text Extraction</title>
+  </head>
+  <body>
+    <h1>Image Text Extraction</h1>
+    <form action="/extract_text" method="POST" enctype="multipart/form-data">
+      <input type="file" name="image" accept="image/*" />
+      <input type="submit" value="텍스트 추출" />
+    </form>
+
+    {% if extracted_text %}
+    <h2>추출된 텍스트:</h2>
+    <pre>{{ extracted_text }}</pre>
+    {% endif %}
+  </body>
+</html>
